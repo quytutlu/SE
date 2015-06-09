@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 4.3.11
+-- version 4.4.3
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 09, 2015 at 11:50 AM
+-- Host: localhost
+-- Generation Time: Jun 09, 2015 at 06:58 PM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -36,19 +36,28 @@ BEGIN
 	UPDATE hoithao SET hoithao.TrangThai=MaDuyet WHERE hoithao.id=id_HoiThao;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `LayThongTinHoiThao`(IN `MaStt` INT)
+BEGIN
+	if Mastt <>2 THEN
+        select hoithao.TenHoiThao,hoithao.NgayToChuc,hoithao.SoNguoiThamGia,hoithao.TrangThai
+        from hoithao
+        WHERE hoithao.TrangThai=MaStt;
+    ELSE
+    	select hoithao.TenHoiThao,hoithao.NgayToChuc,hoithao.SoNguoiThamGia,hoithao.TrangThai
+        from hoithao;
+    END IF;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `LayThongTinHoiThaoChuaDuyet`()
 BEGIN
-	SELECT hoithao.TenHoiThao,hoithao.NgayToChuc,hoithao.SoNguoiThamGia as SoLuongToiDa,R.SoLuongHienTai
-	FROM hoithao LEFT JOIN(
-	SELECT id_hoithao,COUNT(*) as SoLuongHienTai
-	FROM nguoithamgia
-	GROUP BY id_hoithao)as R on hoithao.id=R.id_HoiThao
-	WHERE hoithao.TrangThai=-1;
+	SELECT *
+    FROM hoithao
+    WHERE hoithao.TrangThai=-1;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `LayThongTinHoiThaoDaDuyet`()
 BEGIN
-	SELECT hoithao.TenHoiThao,hoithao.NgayToChuc,hoithao.SoNguoiThamGia as SoLuongToiDa,R.SoLuongHienTai
+	SELECT hoithao.id, hoithao.TenHoiThao,hoithao.NgayToChuc,hoithao.SoNguoiThamGia as SoLuongToiDa,R.SoLuongHienTai
 	FROM hoithao LEFT JOIN(
 	SELECT id_hoithao,COUNT(*) as SoLuongHienTai
 	FROM nguoithamgia
@@ -93,17 +102,15 @@ CREATE TABLE IF NOT EXISTS `hoithao` (
   `SoGio` int(11) NOT NULL,
   `SoNguoiThamGia` int(11) NOT NULL,
   `TrangThai` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `hoithao`
 --
 
 INSERT INTO `hoithao` (`id`, `TenHoiThao`, `NgayToChuc`, `SoGio`, `SoNguoiThamGia`, `TrangThai`) VALUES
-(1, 'Hội thảo nhà thông minh', '16/06/2015', 10, 2, 1),
-(2, 'So nguyen to', '16-6-2015', 10, 3, 1),
-(3, 'Test', '1-1-1', 5, 3, 1),
-(4, 'test2', '16-6-2014', 30, 4, -1);
+(6, 'SmartHome', '16-6-1994', 20, 30, 1),
+(7, 'Nghiên cứu khoa học', '20-6-2015', 10, 20, 0);
 
 -- --------------------------------------------------------
 
@@ -116,15 +123,6 @@ CREATE TABLE IF NOT EXISTS `nguoithamgia` (
   `id_GiangVien` int(11) NOT NULL,
   `id_HoiThao` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `nguoithamgia`
---
-
-INSERT INTO `nguoithamgia` (`id`, `id_GiangVien`, `id_HoiThao`) VALUES
-(1, 1, 1),
-(4, 1, 2),
-(5, 2, 1);
 
 --
 -- Indexes for dumped tables
@@ -150,7 +148,7 @@ ALTER TABLE `nguoithamgia`
 -- AUTO_INCREMENT for table `hoithao`
 --
 ALTER TABLE `hoithao`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `nguoithamgia`
 --
