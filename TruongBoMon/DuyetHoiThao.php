@@ -68,12 +68,11 @@
 	<div style="width:900px; height:100px; margin:auto;font-family:Time New Roman;">
 		<div style="width:500px;float:left">
 		<address>
-		  	<h3><strong>Thông tin tác giả</strong><br></h3>
-		  	<h4>Nguyễn Quý Tú<br>
-		  	Địa chỉ: Ba Vì - Hà Nội<br>
-		  	Email: quytutlu@gmail.com<br>
-		  	<abbr title="Phone">Phone:</abbr> 01688 55 88 10
-		  	</h4>
+		  	<h3><strong>Nhóm tác giả</strong><br></h3>
+		  	<h4>Trần Văn Cường - A20375<br>
+		  	Đoàn Thuý Mai - A20390<br>
+		  	Phạm Minh Tú - A20422<br>
+		  	Nguyễn Quý Tú - A20547</h4>
 		</address>
 		</div>
 	</div>

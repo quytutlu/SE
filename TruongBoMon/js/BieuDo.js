@@ -72,7 +72,7 @@ $(function() {
     }
     percent = parseFloat(obj.series.percent).toFixed(2);
     if(obj.series.label=="Được duyệt ("+DaDuyet+")"){
-      LayDuyetYeuCau(1);
+      LayDuyetYeuCau(3);
     }
     if(obj.series.label=="Không được duyệt ("+KhongDuyet+")"){
       LayDuyetYeuCau(0);
@@ -97,7 +97,7 @@ $(function() {
 })
 function LayDuyetYeuCau(TrangThaiYeuCau){
   var table=document.getElementById("bangyeucau");
-  if(TrangThaiYeuCau=="1"){
+  if(TrangThaiYeuCau=="3"){
     document.getElementById("TB").innerHTML="Danh sách các yêu cầu đã được duyệt";
   }
   if(TrangThaiYeuCau=="0"){
@@ -125,11 +125,11 @@ function PageLayoutYCBD(data){
     var cell2=row.insertCell(1);
     var cell3=row.insertCell(2);
     var cell4=row.insertCell(3);
-    var cell5=row.insertCell(4);
+    //var cell5=row.insertCell(4);
     cell1.innerHTML=(i+1);
     cell2.innerHTML=obj.list[i].TenHoiThao;
     cell3.innerHTML=obj.list[i].NgayToChuc;
     cell4.innerHTML=obj.list[i].SoNguoiThamGia;
-    cell5.innerHTML=obj.list[i].SoLuongHienTai;
+    //cell5.innerHTML=obj.list[i].SoLuongHienTai;
   }
 }

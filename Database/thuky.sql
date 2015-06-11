@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 4.3.11
+-- version 4.4.3
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 10, 2015 at 12:13 PM
+-- Host: localhost
+-- Generation Time: Jun 11, 2015 at 05:55 PM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -41,12 +41,30 @@ BEGIN
 	UPDATE hoithao set hoithao.TrangThai=2 WHERE hoithao.id=id_HoiThao;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `LayDanhSachGiangVienThamGiaHoiThao`(IN `id_HoiThao` INT)
+BEGIN
+	SELECT nguoithamgia.id_GiangVien,nguoithamgia.SoGioNhanDuoc
+	FROM nguoithamgia
+	WHERE nguoithamgia.id_HoiThao=id_HoiThao;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `LayHoiThao`(id_HoiThao int)
+BEGIN
+	SELECT hoithao.TenHoiThao,hoithao.NgayToChuc
+    FROM hoithao
+    WHERE hoithao.id=id_HoiThao;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `LayThongTinHoiThao`(IN `MaStt` INT)
 BEGIN
-	if Mastt <>2 THEN
+	if Mastt =-1 or Mastt=0 or Mastt=1 THEN
         select hoithao.TenHoiThao,hoithao.NgayToChuc,hoithao.SoNguoiThamGia,hoithao.TrangThai
         from hoithao
         WHERE hoithao.TrangThai=MaStt;
+    ELSEIF Mastt =3 THEN
+    	select hoithao.TenHoiThao,hoithao.NgayToChuc,hoithao.SoNguoiThamGia,hoithao.TrangThai
+        from hoithao
+        WHERE hoithao.TrangThai>0;
     ELSE
     	select hoithao.TenHoiThao,hoithao.NgayToChuc,hoithao.SoNguoiThamGia,hoithao.TrangThai
         from hoithao;
@@ -75,12 +93,18 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `LayThongTinHoiThaoDaThucHien`()
 BEGIN
-	SELECT hoithao.id, hoithao.TenHoiThao,hoithao.NgayToChuc,hoithao.SoNguoiThamGia as SoLuongToiDa,R.SoLuongHienTai
+	SELECT hoithao.id, hoithao.TenHoiThao,hoithao.NgayToChuc,hoithao.SoGio ,hoithao.SoNguoiThamGia as SoLuongToiDa,R.SoLuongHienTai
 	FROM hoithao LEFT JOIN(
+
 	SELECT id_hoithao,COUNT(*) as SoLuongHienTai
 	FROM nguoithamgia
 	GROUP BY id_hoithao)as R on hoithao.id=R.id_HoiThao
 	WHERE hoithao.TrangThai=2;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SetSoGioNhanDuoc`(id_GiangVien int,id_HoiThao int, SoGio int)
+BEGIN
+	UPDATE nguoithamgia set nguoithamgia.SoGioNhanDuoc=SoGio WHERE nguoithamgia.id_GiangVien=id_GiangVien AND nguoithamgia.id_HoiThao=id_HoiThao;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `TaoHoiThao`(IN `TenHoiThao` VARCHAR(50), IN `NgayToChuc` VARCHAR(50), IN `SoGio` INT, IN `SoNguoiThamGia` INT)
@@ -120,19 +144,16 @@ CREATE TABLE IF NOT EXISTS `hoithao` (
   `SoGio` int(11) NOT NULL,
   `SoNguoiThamGia` int(11) NOT NULL,
   `TrangThai` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `hoithao`
 --
 
 INSERT INTO `hoithao` (`id`, `TenHoiThao`, `NgayToChuc`, `SoGio`, `SoNguoiThamGia`, `TrangThai`) VALUES
-(6, 'SmartHome', '16-6-1994', 20, 30, 2),
-(7, 'Nghiên cứu khoa học', '20-6-2015', 10, 20, 0),
-(8, 'Hội thảo sức khỏe', '10-10-2015', 20, 15, 1),
-(9, 'Hội thảo tin học', '12-3-2015', 10, 3, 1),
-(10, 'Hội thảo việc làm', '12-5-2015', 10, 2, 2),
-(11, 'Hội thảo tiếng anh', '11-4-2015', 5, 1, 2);
+(12, 'Smarthome', '16-6-2015', 10, 5, 2),
+(13, 'Hội thảo việc làm', '15-6-2012', 15, 5, 2),
+(14, 'Hội thảo việc làm', '12-5-2015', 30, 15, -1);
 
 -- --------------------------------------------------------
 
@@ -143,16 +164,17 @@ INSERT INTO `hoithao` (`id`, `TenHoiThao`, `NgayToChuc`, `SoGio`, `SoNguoiThamGi
 CREATE TABLE IF NOT EXISTS `nguoithamgia` (
   `id` int(11) NOT NULL,
   `id_GiangVien` int(11) NOT NULL,
-  `id_HoiThao` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `id_HoiThao` int(11) NOT NULL,
+  `SoGioNhanDuoc` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `nguoithamgia`
 --
 
-INSERT INTO `nguoithamgia` (`id`, `id_GiangVien`, `id_HoiThao`) VALUES
-(34, 4, 6),
-(39, 4, 11);
+INSERT INTO `nguoithamgia` (`id`, `id_GiangVien`, `id_HoiThao`, `SoGioNhanDuoc`) VALUES
+(45, 3, 12, 5),
+(46, 3, 13, 10);
 
 --
 -- Indexes for dumped tables
@@ -178,12 +200,12 @@ ALTER TABLE `nguoithamgia`
 -- AUTO_INCREMENT for table `hoithao`
 --
 ALTER TABLE `hoithao`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `nguoithamgia`
 --
 ALTER TABLE `nguoithamgia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=47;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

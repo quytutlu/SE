@@ -31,7 +31,7 @@ $.ajax({type: 'GET',url: temp,
 var temp="../ThuKy/API.php?cmd=LayThongTinHoiThao&MaStt=2";
 	$.ajax({type: 'GET',url: temp,
 	success:function(data){
-	  PageLayoutYCBD(data);
+	  PageLayoutYC(data);
 	}
 });
 function PageLayoutYC(data){
@@ -43,11 +43,11 @@ function PageLayoutYC(data){
     var cell2=row.insertCell(1);
     var cell3=row.insertCell(2);
     var cell4=row.insertCell(3);
-    var cell5=row.insertCell(4);
+    //var cell5=row.insertCell(4);
     cell1.innerHTML=(i+1);
     cell2.innerHTML=obj.list[i].TenHoiThao;
     cell3.innerHTML=obj.list[i].NgayToChuc;
     cell4.innerHTML=obj.list[i].SoNguoiThamGia;
-    cell5.innerHTML=obj.list[i].SoLuongHienTai;
+    //cell5.innerHTML=obj.list[i].SoLuongHienTai;
   }
 }

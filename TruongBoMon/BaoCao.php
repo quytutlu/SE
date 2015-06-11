@@ -12,7 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="../bootstrap-3.3.4-dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="../bootstrap-3.3.4-dist/css/bootstrap-theme.min.css">
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-	<link rel="icon" type="image/png" href="image/icon.png" sizes="196x196" />
+	<link rel="icon" type="image/png" href="../image/icon.png" sizes="196x196" />
 	<script src="js/jquery-2.1.3.min.js"></script>
 	<link rel="stylesheet" href="css/standard.css">
 	<link rel="stylesheet" type="text/css" href="css/tipr.css">
@@ -54,14 +54,14 @@
 				<center style="margin-top:70px;">
 					<p class="h1" id="TB">Danh sách các yêu cầu đã đề xuất</p>
 				</center>
-			   	<div style="overflow: auto;height: 450px;">
+			   	<div style="overflow: auto;height: 370px;">
 					<table class="table table-striped table-bordered table-hover" id="bangyeucau" cellpadding="0" cellspacing="0">
 						<tr>
 							<th class="bg-info" style="text-align: center">STT</th>
 							<th class="bg-info" style="text-align: center">Tên hội thảo</th>
 							<th class="bg-info" style="text-align: center">Ngày tổ chức</th>
-							<th class="bg-info" style="text-align: center">Số người tham gia</th>
-							<th class="bg-info" style="text-align: center">Trạng thái</th>
+							<th class="bg-info" style="text-align: center">Số người tối đa</th>
+							<!-- <th class="bg-info" style="text-align: center">Trạng thái</th> -->
 						</tr>
 					</table>
 				</div>
@@ -92,7 +92,17 @@
 			</div><!--/.sidebar-offcanvas-->
 		</div><!--/row-->
 	</div>
-	
+	<div style="width:900px; height:100px; margin:auto;font-family:Time New Roman;">
+		<div style="width:500px;float:left">
+		<address>
+		  	<h3><strong>Nhóm tác giả</strong><br></h3>
+		  	<h4>Trần Văn Cường - A20375<br>
+		  	Đoàn Thuý Mai - A20390<br>
+		  	Phạm Minh Tú - A20422<br>
+		  	Nguyễn Quý Tú - A20547</h4>
+		</address>
+		</div>
+	</div>
 	
 	<script type="text/javascript" src="../bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/BaoCao.js"></script>

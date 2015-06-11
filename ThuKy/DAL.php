@@ -17,8 +17,8 @@
 			$sql="Call DuyetHoiThao(".$id_HoiThao.",".$MaDuyet.")";
 			return mysql_query($sql);
 		}
-		public function LayThongTinHoiThaoDaDuyet(){
-			$sql="Call LayThongTinHoiThaoDaDuyet()";
+		public function LayThongTinHoiThaoDaDuyet($id_GiangVien){
+			$sql="Call LayThongTinHoiThaoDaDuyet(".$id_GiangVien.")";
 			return mysql_query($sql);
 		}
 		public function LayThongTinHoiThaoChuaDuyet(){
@@ -40,6 +40,26 @@
 		}
 		public function LayThongTinHoiThao($MaStt){
 			$sql="Call LayThongTinHoiThao(".$MaStt.")";
+			return mysql_query($sql);
+		}
+		public function KhoaDangKy($id_HoiThao){
+			$sql="Call KhoaDangKy(".$id_HoiThao.")";
+			return mysql_query($sql);
+		}
+		public function LayDanhSachGiangVienThamGiaHoiThao($id_HoiThao){
+			$sql="Call LayDanhSachGiangVienThamGiaHoiThao(".$id_HoiThao.")";
+			return mysql_query($sql);
+		}
+		public function LayThongTinHoiThaoDaThucHien(){
+			$sql="Call LayThongTinHoiThaoDaThucHien()";
+			return mysql_query($sql);
+		}
+		public function SetSoGioNhanDuoc($id_GiangVien,$id_HoiThao,$SoGio){
+			$sql="Call SetSoGioNhanDuoc(".$id_GiangVien.",".$id_HoiThao.",".$SoGio.")";
+			return mysql_query($sql);
+		}
+		public function LayHoiThao($id_HoiThao){
+			$sql="Call LayHoiThao(".$id_HoiThao.")";
 			return mysql_query($sql);
 		}
 	}

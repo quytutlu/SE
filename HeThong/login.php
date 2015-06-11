@@ -3,7 +3,7 @@
 	<title>Software Engineering</title>
 	<link rel="stylesheet" type="text/css" href="../bootstrap-3.3.4-dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="../bootstrap-3.3.4-dist/css/bootstrap-theme.min.css">
-	<link rel="icon" type="image/png" href="icon.png" sizes="196x196" />
+	<link rel="icon" type="image/png" href="image/icon.png" sizes="196x196" />
 </head>
 <body background="image/Background.jpg">
 	<script type="text/javascript">
@@ -24,6 +24,8 @@
 					window.location.href = "../TruongBoMon";
 				}else if(obj.ThongTinTK.VaiTro==2){
 					window.location.href = "../ThuKy";
+				}else{
+					window.location.href = "../GiangVien";
 				}
 			}else{
 				alert("Đăng nhập thất bại");
@@ -35,13 +37,13 @@
 		<div class="form-group" style="margin-top:100px">
 		    <label for="inputEmail3" class="col-sm-2 control-label">Tên đăng nhập</label>
 		    <div class="col-sm-10">
-		      <input style="width:300px" type="text" class="form-control" id="user" placeholder="Username">
+		      <input style="width:300px" type="text" class="form-control" id="user" placeholder="Username" onkeydown="{if(event.keyCode == 13){DangNhap()};};">
 		    </div>
 		</div>
 		<div class="form-group">
 			<label for="inputPassword3" class="col-sm-2 control-label">Mật khẩu</label>
 			<div class="col-sm-10">
-			    <input style="width:300px" type="password" class="form-control" id="pass" placeholder="Password">
+			    <input style="width:300px" type="password" class="form-control" id="pass" placeholder="Password" onkeydown="{if(event.keyCode == 13){DangNhap()};};">
 			</div>
 		</div>
 		<div class="form-group">

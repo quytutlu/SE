@@ -19,7 +19,9 @@
 				}
 				break;
 			case 'LayThongTinHoiThaoDaDuyet':
-				Display("list",$XuLyNV->LayThongTinHoiThaoDaDuyet());
+				if(isset($_GET['id_GiangVien'])){
+					Display("list",$XuLyNV->LayThongTinHoiThaoDaDuyet($_GET['id_GiangVien']));
+				}
 				break;
 			case 'LayThongTinHoiThaoChuaDuyet':
 				Display("list",$XuLyNV->LayThongTinHoiThaoChuaDuyet());
@@ -42,6 +44,29 @@
 			case 'LayThongTinHoiThao':
 				if(isset($_GET['MaStt'])){
 					Display("list",$XuLyNV->LayThongTinHoiThao($_GET['MaStt']));
+				}
+				break;
+			case 'KhoaDangKy':
+				if(isset($_GET['id_HoiThao'])){
+					Display("success",$XuLyNV->KhoaDangKy($_GET['id_HoiThao']));
+				}
+				break;
+			case 'LayDanhSachGiangVienThamGiaHoiThao':
+				if(isset($_GET['id_HoiThao'])){
+					Display("list",$XuLyNV->LayDanhSachGiangVienThamGiaHoiThao($_GET['id_HoiThao']));
+				}
+				break;
+			case 'LayThongTinHoiThaoDaThucHien':
+				Display("list",$XuLyNV->LayThongTinHoiThaoDaThucHien());
+				break;
+			case 'SetSoGioNhanDuoc':
+				if(isset($_GET['id_GiangVien'])&&isset($_GET['id_HoiThao'])&&isset($_GET['SoGio'])){
+					Display("success",$XuLyNV->SetSoGioNhanDuoc($_GET['id_GiangVien'],$_GET['id_HoiThao'],$_GET['SoGio']));
+				}
+				break;
+			case 'LayHoiThao':
+				if(isset($_GET['id_HoiThao'])){
+					echo json_encode($XuLyNV->LayHoiThao($_GET['id_HoiThao']));
 				}
 				break;
 		}

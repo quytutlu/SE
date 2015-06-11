@@ -17,8 +17,12 @@
 					}else{
 						$KetQua=json_encode(array('success'=>false));
 						echo $KetQua;
-					}
-					
+					}	
+				}
+				break;
+			case 'LayThongTinGiangVien':
+				if(isset($_GET['id_GiangVien'])){
+					Display("ThongTin",$XuLyNV->LayThongTinGiangVien($_GET['id_GiangVien']));
 				}
 				break;
 		}

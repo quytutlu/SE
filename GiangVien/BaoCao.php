@@ -27,9 +27,8 @@
 				</button>
 				<a class="navbar-brand">Software Engineering</a>
 				<ul class="nav navbar-nav">
-		            <li><a href="TaoHoiThao.php" >Tạo hội thảo</a></li>
-		            <li><a href="KhoaHoiThao.php" >Khóa hội thảo</a></li>
-		            <li><a href="ChoGioGiangVien.php" >Nhập giờ giảng viên</a></li>
+					<li><a href="DangKyHoiThao.php">Đăng ký hội thảo</a></li>
+	            	<li><a href="BaoCao.php">Báo cáo</a></li>
           		</ul>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
@@ -47,38 +46,30 @@
 		</div>
 	</nav>
 
-	<div class="container" style="margin-top:150px">
-		<form class="form-horizontal">
-		  <div class="form-group">
-		    <label for="inputEmail3" class="col-sm-2 control-label">Tên hội thảo</label>
-		    <div class="col-sm-10">
-		      <input type="text" class="form-control" style="width:300px" id="TenHoiThao" placeholder="Tên hội thảo">
-		    </div>
-		  </div>
-		  <div class="form-group">
-		    <label for="inputPassword3" class="col-sm-2 control-label">Ngày tổ chức</label>
-		    <div class="col-sm-10">
-		      <input type="text" class="form-control" style="width:300px" id="NgayToChuc" placeholder="Ngày tổ chức">
-		    </div>
-		  </div>
-		</form>
-		<form class="form-horizontal">
-		  <div class="form-group">
-		    <label for="inputEmail3" class="col-sm-2 control-label">Số giờ</label>
-		    <div class="col-sm-10">
-		      <input type="text" class="form-control" style="width:300px" id="SoGio" placeholder="Số giờ">
-		    </div>
-		  </div>
-		  <div class="form-group">
-		    <label for="inputPassword3" class="col-sm-2 control-label">Số người tham gia</label>
-		    <div class="col-sm-10">
-		      <input type="text" class="form-control" style="width:300px" id="SoNguoiThamGia" placeholder="Số người tham gia">
-		    </div>
-		  </div>
-		</form>
-		<button type="button" class="btn btn-default" style="margin-left:200px" onclick="TaoHoiThao();">Tạo hội thảo</button>
+	<div class="container">
+		<center style="margin-top:100px;">
+			<p class="h1">Các hội thảo đã tham gia</p>
+		</center>	
+		<div style="width:700px; height:350px; margin: 0 auto; font-size:30px; overflow-y: auto;">
+			<center>
+				<table class="table table-striped table-bordered table-hover" id="listHoiThao">
+					<tr>
+						<th class="bg-info" style="text-align: center">STT</th>
+						<th class="bg-info" style="text-align: center">Tên hội thảo</th>
+						<th class="bg-info" style="text-align: center">Ngày tổ chức</th>
+						<th class="bg-info" style="text-align: center">Số giờ</th>
+					</tr>
+					<!-- <tfoot>
+					    <tr>
+					      <td>Sum</td>
+					      <td>$180</td>
+					    </tr>
+					</tfoot> -->
+				</table>
+			</center>
+		</div>
 	</div>
-	<div style="width:900px; height:100px;margin:auto; margin-top:120px;font-family:Time New Roman;">
+	<div style="width:900px; height:100px; margin:auto;font-family:Time New Roman;">
 		<div style="width:500px;float:left">
 		<address>
 		  	<h3><strong>Nhóm tác giả</strong><br></h3>
@@ -90,11 +81,6 @@
 		</div>
 	</div>
 	<script type="text/javascript" src="../bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/TaoHoiThao.js"></script> 
-	<script type="text/javascript">
-		function DangXuat(){
-			window.location.href="..";
-		}
-	</script>
+	<script type="text/javascript" src="js/BaoCao.js"></script>
 </body>
 </html>

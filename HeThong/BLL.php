@@ -16,5 +16,12 @@
 			$tk->VaiTro=$row[3];
 			return $tk;
 		}
+		public function LayThongTinGiangVien($id_GiangVien){
+			$GiangVien=new TaiKhoan();
+			$row=mysql_fetch_array($this->ThaoTacCSDL->LayThongTinGiangVien($id_GiangVien));
+			$GiangVien->id=$row[0];
+			$GiangVien->TenDangNhap=$row[1];
+			return $GiangVien;
+		}
 	}
 ?>
