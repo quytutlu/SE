@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 11, 2015 at 05:54 PM
+-- Generation Time: Jun 14, 2015 at 12:30 PM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -31,11 +31,10 @@ BEGIN
 	WHERE thongtinnguoidung.TenDangNhap=TenDangNhap and thongtinnguoidung.MatKhau=MatKhau;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `LayThongTinGiangVien`(IN `id_GiangVien` INT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `LayThongTinGiangVien`()
 BEGIN
 	SELECT thongtinnguoidung.id,thongtinnguoidung.HoVaTen
-	FROM thongtinnguoidung
-	WHERE thongtinnguoidung.id=id_GiangVien;
+	FROM thongtinnguoidung;
 END$$
 
 DELIMITER ;

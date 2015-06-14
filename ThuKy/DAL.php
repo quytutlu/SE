@@ -55,8 +55,9 @@
 			return mysql_query($sql);
 		}
 		public function SetSoGioNhanDuoc($id_GiangVien,$id_HoiThao,$SoGio){
-			$sql="Call SetSoGioNhanDuoc(".$id_GiangVien.",".$id_HoiThao.",".$SoGio.")";
-			return mysql_query($sql);
+			$sql="Call SetSoGioNhanDuoc(".$id_GiangVien.",".$id_HoiThao.",".$SoGio.",@KetQua)";
+			mysql_query($sql);
+			return mysql_query("SELECT @KetQua AS KQ");
 		}
 		public function LayHoiThao($id_HoiThao){
 			$sql="Call LayHoiThao(".$id_HoiThao.")";

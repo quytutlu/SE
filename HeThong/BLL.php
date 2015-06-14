@@ -16,12 +16,17 @@
 			$tk->VaiTro=$row[3];
 			return $tk;
 		}
-		public function LayThongTinGiangVien($id_GiangVien){
-			$GiangVien=new TaiKhoan();
-			$row=mysql_fetch_array($this->ThaoTacCSDL->LayThongTinGiangVien($id_GiangVien));
-			$GiangVien->id=$row[0];
-			$GiangVien->TenDangNhap=$row[1];
-			return $GiangVien;
+		public function LayThongTinGiangVien(){
+			
+			$kq=$this->ThaoTacCSDL->LayThongTinGiangVien();
+			$list="";
+			while($row=mysql_fetch_array($kq)){
+				$GiangVien=new TaiKhoan();
+				$GiangVien->id=$row[0];
+				$GiangVien->TenDangNhap=$row[1];
+				$list[]=$GiangVien;
+			}
+			return $list;
 		}
 	}
 ?>

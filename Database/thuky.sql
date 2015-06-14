@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 11, 2015 at 05:55 PM
+-- Generation Time: Jun 14, 2015 at 12:30 PM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -102,9 +102,20 @@ BEGIN
 	WHERE hoithao.TrangThai=2;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SetSoGioNhanDuoc`(id_GiangVien int,id_HoiThao int, SoGio int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SetSoGioNhanDuoc`(IN `id_GiangVien` INT, IN `id_HoiThao` INT, IN `SoGio` INT, OUT `KetQua` INT)
 BEGIN
-	UPDATE nguoithamgia set nguoithamgia.SoGioNhanDuoc=SoGio WHERE nguoithamgia.id_GiangVien=id_GiangVien AND nguoithamgia.id_HoiThao=id_HoiThao;
+	declare SoGioToiDa int;
+    declare SoGioSauKhiCapNhat int;
+    
+	set SoGioToiDa=(SELECT hoithao.SoGio FROM hoithao WHERE hoithao.id=id_HoiThao);
+    set SoGioSauKhiCapNhat=(SELECT sum(nguoithamgia.SoGioNhanDuoc) FROM nguoithamgia WHERE nguoithamgia.id_HoiThao=id_HoiThao and nguoithamgia.id_GiangVien <> id_GiangVien);
+    set SoGioSauKhiCapNhat=SoGioSauKhiCapNhat+SoGio;
+	if (SoGioToiDa>=SoGioSauKhiCapNhat) then
+		UPDATE nguoithamgia set nguoithamgia.SoGioNhanDuoc=SoGio WHERE nguoithamgia.id_GiangVien=id_GiangVien AND nguoithamgia.id_HoiThao=id_HoiThao;
+        set KetQua=1;
+    else
+		Set KetQua=0;
+    end if;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `TaoHoiThao`(IN `TenHoiThao` VARCHAR(50), IN `NgayToChuc` VARCHAR(50), IN `SoGio` INT, IN `SoNguoiThamGia` INT)
@@ -144,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `hoithao` (
   `SoGio` int(11) NOT NULL,
   `SoNguoiThamGia` int(11) NOT NULL,
   `TrangThai` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `hoithao`
@@ -153,7 +164,8 @@ CREATE TABLE IF NOT EXISTS `hoithao` (
 INSERT INTO `hoithao` (`id`, `TenHoiThao`, `NgayToChuc`, `SoGio`, `SoNguoiThamGia`, `TrangThai`) VALUES
 (12, 'Smarthome', '16-6-2015', 10, 5, 2),
 (13, 'Hội thảo việc làm', '15-6-2012', 15, 5, 2),
-(14, 'Hội thảo việc làm', '12-5-2015', 30, 15, -1);
+(14, 'Hội thảo việc làm', '12-5-2015', 30, 15, -1),
+(15, 'Hội thảo lập trình nhúng', '16/6/2015', 10, 5, -1);
 
 -- --------------------------------------------------------
 
@@ -165,8 +177,8 @@ CREATE TABLE IF NOT EXISTS `nguoithamgia` (
   `id` int(11) NOT NULL,
   `id_GiangVien` int(11) NOT NULL,
   `id_HoiThao` int(11) NOT NULL,
-  `SoGioNhanDuoc` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `SoGioNhanDuoc` int(11) DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `nguoithamgia`
@@ -174,7 +186,8 @@ CREATE TABLE IF NOT EXISTS `nguoithamgia` (
 
 INSERT INTO `nguoithamgia` (`id`, `id_GiangVien`, `id_HoiThao`, `SoGioNhanDuoc`) VALUES
 (45, 3, 12, 5),
-(46, 3, 13, 10);
+(46, 3, 13, 10),
+(47, 4, 12, 5);
 
 --
 -- Indexes for dumped tables
@@ -200,12 +213,12 @@ ALTER TABLE `nguoithamgia`
 -- AUTO_INCREMENT for table `hoithao`
 --
 ALTER TABLE `hoithao`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `nguoithamgia`
 --
 ALTER TABLE `nguoithamgia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=49;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -95,7 +95,7 @@
 		}
 		public function SetSoGioNhanDuoc($id_GiangVien,$id_HoiThao,$SoGio){
 			//echo $id_GiangVien.$id_HoiThao.$SoGio;
-			return $this->ThaoTacCSDL->SetSoGioNhanDuoc($id_GiangVien,$id_HoiThao,$SoGio);
+			return mysql_fetch_array($this->ThaoTacCSDL->SetSoGioNhanDuoc($id_GiangVien,$id_HoiThao,$SoGio))[0]==1;
 		}
 		public function LayHoiThao($id_HoiThao){
 			$kq=$this->ThaoTacCSDL->LayHoiThao($id_HoiThao);

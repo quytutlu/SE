@@ -13,8 +13,8 @@
 			$sql="Call DangNhap('".$TenDangNhap."','".$MatKhau."')";
 			return mysql_query($sql);
 		}
-		public function LayThongTinGiangVien($id_GiangVien){
-			$sql="Call LayThongTinGiangVien(".$id_GiangVien.")";
+		public function LayThongTinGiangVien(){
+			$sql="Call LayThongTinGiangVien()";
 			return mysql_query($sql);
 		}
 	}

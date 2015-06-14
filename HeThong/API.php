@@ -21,9 +21,7 @@
 				}
 				break;
 			case 'LayThongTinGiangVien':
-				if(isset($_GET['id_GiangVien'])){
-					Display("ThongTin",$XuLyNV->LayThongTinGiangVien($_GET['id_GiangVien']));
-				}
+				Display("list",$XuLyNV->LayThongTinGiangVien());
 				break;
 		}
 	}else{
